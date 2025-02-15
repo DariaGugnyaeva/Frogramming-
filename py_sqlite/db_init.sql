@@ -8,4 +8,4 @@ CREATE TABLE IF NOT EXISTS library (
     num_shell INTEGER,
     status BOOLEAN DEFAULT FALSE,
     CHECK ((year_created < 2026) AND (name_book <> ''))
-)
+);
