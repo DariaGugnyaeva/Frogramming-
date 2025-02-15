@@ -6,6 +6,6 @@ CREATE TABLE IF NOT EXISTS library (
     edition INTEGER,
     num_book_case INTEGER,
     num_shell INTEGER,
-    status TEXT,
-    CHECK ((year_created < 2026) AND (name_book <> '') AND (status = 'есть в библиотеке' OR status = "у посетителя"))
-);
+    status BOOLEAN DEFAULT FALSE,
+    CHECK ((year_created < 2026) AND (name_book <> ''))
+)
