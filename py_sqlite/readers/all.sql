@@ -1,4 +1,4 @@
-SELECT readers.num_reader_card, visitors.surname, visitors.name, library.name_book
+SELECT readers.num_reader_card, visitors.surname, visitors.name, library.name_book, library.status
 FROM readers
 JOIN visitors
   ON visitors.num_reader_card = readers.num_reader_card
