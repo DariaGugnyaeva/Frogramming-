@@ -4,4 +4,4 @@ INSERT INTO visitors (
     surname,
     num_reader_card,
     address
-) VALUES (?, ?);
+) VALUES (?, ?, ?, ?, ?);
