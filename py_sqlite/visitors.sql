@@ -1,8 +1,8 @@
 CREATE TABLE visitors (
     id INTEGER PRIMARY KEY,
-    name TEXT,
-    second_name TEXT,
-    surname TEXT,
+    name VARCHAR(20),
+    surname VARCHAR(20),
+    second_name VARCHAR(20),
     num_reader_card INTEGER,
-    address TEXT
+    address VARCHAR(20)
 );
