@@ -3,12 +3,12 @@ import sqlite3
 from db.utils import get_script_from_file
 
 
-class Task:
+class Library:
     """
     Class implementing task table logic
     """
 
-    class class_library:  # TaskObjects
+    class ClassLibrary:  # TaskObjects
         """
         Proxy class for task table
         """
@@ -40,7 +40,7 @@ class Task:
         def delete(self, id: int) -> None:
             self._template_query("delete.sql", id)
 
-    class class_visitors:
+    class ClassVisitors:
         """
         Proxy class for task table
         """
@@ -57,19 +57,19 @@ class Task:
             self.conn.commit()
             return res.fetchall()
 
-        def all(self) -> list[tuple[str, str, bool]]:
+        def all(self) -> list[tuple[str, str, str, int, str]]:
             return self._template_query("all.sql")
 
-        def create(self, name: str, description: str) -> None:
+        def create(self, name: str, surname: str, second_name: str, num_reader_card: str, address: str) -> None:
             self._template_query("create.sql", name, description)
 
-        def search(self, pattern: str) -> list[tuple[int, str, str, bool]]:
+        def search(self, name: str, surname: str, num_reader_card: int) -> list[tuple[int, str, str, bool]]:
             return self._template_query("search.sql", pattern, pattern)
 
         def delete(self, id: int) -> None:
             self._template_query("delete.sql", id)
 
-    class class_readers:
+    class ClassReaders:
         """
         Proxy class for task table
         """
@@ -86,17 +86,19 @@ class Task:
             self.conn.commit()
             return res.fetchall()
 
-        def all(self) -> list[tuple[str, str, bool]]:
+        def all(self) -> list[tuple[int, str, str, str, bool]]:
             return self._template_query("all.sql")
 
     conn: sqlite3.Connection
-    objects: class_library, class_visitors, class_readers
+    objects: ClassLibrary, ClassVisitors, ClassReaders
 
     def __init__(self, db_path: str) -> None:
         self.conn = sqlite3.connect(db_path)
         cursor = self.conn.cursor()
-        cursor.executescript(get_script_from_file("db_init.sql"))
+        cursor.executescript(get_script_from_file("db_library.sql"))
+        cursor.executescript(get_script_from_file("db_visitors.sql"))
+        cursor.executescript(get_script_from_file("db_readers.sql"))
         self.conn.commit()
-        self.objects = Task.class_library(self.conn)
-        self.objects = Task.class_visitors(self.conn)
-        self.objects = Task.class_readers(self.conn)
+        self.objects_1 = Library.ClassLibrary(self.conn)
+        self.objects_2 = Library.ClassVisitors(self.conn)
+        self.objects_3 = Library.ClassReaders(self.conn)
