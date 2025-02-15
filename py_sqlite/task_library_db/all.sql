@@ -5,4 +5,4 @@ SELECT
     edition,
     num_book_case,
     num_shell
-FROM task;
+FROM library;
