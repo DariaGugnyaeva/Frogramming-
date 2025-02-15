@@ -1,6 +1,6 @@
 SELECT
     name,
-    second_name,
+    surname,
     num_reader_card
-FROM task
-WHERE (name LIKE '%' || ? || '%') OR (second_name LIKE '%' || ? || '%') OR (num_reader_card LIKE '%' || ? || '%');
+FROM visitors
+WHERE (name LIKE '%' || ? || '%') OR (second_name LIKE '%' || ? || '%') OR (num_reader_card = ?);
